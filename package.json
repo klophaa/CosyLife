@@ -4,8 +4,7 @@
   "private": true,
   "description": "Application mobile PWA pour simplifier la vie: taches, budget, listes et organisation.",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "check": "node --check app.js"
+    "dev": "node local-server.js",
+    "check": "node --check app.js && node --check service-worker.js && node --check local-server.js"
   }
 }

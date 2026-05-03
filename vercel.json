@@ -1,5 +1,9 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
   "cleanUrls": true,
+  "buildCommand": "echo Static site ready",
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/favicon.ico",
