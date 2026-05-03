@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#15252a">
+    <meta name="description" content="Une application mobile pour simplifier la vie: taches, budget, listes et organisation.">
+    <title>CosyLife</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icon.svg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Simplifier la vie</p>
+          <h1>CosyLife</h1>
+        </div>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Changer d'ambiance">
+          <span aria-hidden="true">◐</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="sky" aria-hidden="true">
+            <span class="star star-a"></span>
+            <span class="star star-b"></span>
+            <span class="star star-c"></span>
+            <span class="planet"></span>
+          </div>
+          <div class="hero-copy">
+            <p id="todayLabel"></p>
+            <h2>Un petit centre de contrôle doux pour ta journée.</h2>
+          </div>
+          <div class="progress-ring" aria-label="Progression des taches du jour">
+            <svg viewBox="0 0 120 120" role="img">
+              <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+              <circle class="ring-value" id="progressCircle" cx="60" cy="60" r="50"></circle>
+            </svg>
+            <div>
+              <strong id="progressPercent">0%</strong>
+              <span>fait</span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="tabs" aria-label="Sections principales">
+          <button class="tab active" type="button" data-view="tasks">Taches</button>
+          <button class="tab" type="button" data-view="budget">Budget</button>
+          <button class="tab" type="button" data-view="lists">Listes</button>
+          <button class="tab" type="button" data-view="notes">Notes</button>
+        </nav>
+
+        <section class="view active" id="tasksView" aria-labelledby="tasksTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Aujourd'hui</p>
+              <h2 id="tasksTitle">To do list</h2>
+            </div>
+            <span class="metric" id="taskMetric">0/0</span>
+          </div>
+          <form class="inline-form" id="taskForm">
+            <input id="taskInput" type="text" autocomplete="off" placeholder="Ajouter une chose a faire" aria-label="Nouvelle tache">
+            <button type="submit">Ajouter</button>
+          </form>
+          <div class="item-list" id="tasksList"></div>
+        </section>
+
+        <section class="view" id="budgetView" aria-labelledby="budgetTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Respirer avec son argent</p>
+              <h2 id="budgetTitle">Budget</h2>
+            </div>
+          </div>
+          <div class="budget-summary">
+            <div>
+              <span>Entrees</span>
+              <strong id="incomeTotal">0 €</strong>
+            </div>
+            <div>
+              <span>Sorties</span>
+              <strong id="expenseTotal">0 €</strong>
+            </div>
+            <div>
+              <span>Reste</span>
+              <strong id="balanceTotal">0 €</strong>
+            </div>
+          </div>
+          <form class="budget-form" id="budgetForm">
+            <input id="budgetLabel" type="text" autocomplete="off" placeholder="Loyer, courses, salaire..." aria-label="Libelle">
+            <input id="budgetAmount" type="number" inputmode="decimal" step="0.01" placeholder="Montant" aria-label="Montant">
+            <select id="budgetType" aria-label="Type de mouvement">
+              <option value="expense">Depense</option>
+              <option value="income">Entree</option>
+            </select>
+            <button type="submit">Ajouter</button>
+          </form>
+          <div class="item-list" id="budgetList"></div>
+        </section>
+
+        <section class="view" id="listsView" aria-labelledby="listsTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Ne rien oublier</p>
+              <h2 id="listsTitle">Listes utiles</h2>
+            </div>
+          </div>
+          <form class="inline-form" id="listForm">
+            <input id="listInput" type="text" autocomplete="off" placeholder="Pharmacie, valise, courses..." aria-label="Nouvelle liste">
+            <button type="submit">Creer</button>
+          </form>
+          <div class="collection-list" id="collections"></div>
+        </section>
+
+        <section class="view" id="notesView" aria-labelledby="notesTitle">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Pensées rapides</p>
+              <h2 id="notesTitle">Notes</h2>
+            </div>
+          </div>
+          <form class="note-form" id="noteForm">
+            <textarea id="noteInput" rows="4" placeholder="Une idee, un rappel, une envie..." aria-label="Nouvelle note"></textarea>
+            <button type="submit">Enregistrer</button>
+          </form>
+          <div class="item-list" id="notesList"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="emptyTemplate">
+      <div class="empty-state">
+        <strong></strong>
+        <span></span>
+      </div>
+    </template>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
